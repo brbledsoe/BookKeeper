@@ -6,21 +6,84 @@
 	</head>
 	<body>
 		<form>
-			First name: <input type='text' /> <br>
-			Last name: <input type='text' /> <br>
-			Midlle name: <input type='text' /> <br>
+			First name: <input class="name" type='text' /> <br>
+			Last name: <input class="name" type='text' /> <br>
+			Midlle name: <input class="name" type='text' /> <br>
 			Username: <input type='text' /> <br>
 			Email: <input type='text' /> <br>
-			Password: <input type='password' /> <br>
-			Repeat Password: <input type='password' /> <br>
-			Telephone: <input type='text' /> <br>
+			Password: <input id="password" type='password' /> <br>
+			Repeat Password: <input id="repass" type='password' /> <br>
+			Telephone: <input id="phone" type='tel' /> <br>
 			Street Address <input type='text' /> <br>
 			City: <input type='text' /> <br>
 			Zip code: <input type='text' /> <br>
 			State: <input type='text' /> <br>
-			Country: <input type='text' /> <br>
+			Country: <input id="country" type='text' /> <br>
 			<input type='checkbox'/>	Remember me <br>
-			<button type="submit">Submit</button> 
+			<button id="submit" type="button">Submit</button> 
 		</form>
+
+		<div id="msg"></div>
+		<div id="msg2"></div>
+		<div id="msg3"></div>
+		<div id="msg4"></div>
+		<div id="msg5"></div>
+		<div id="msg6"></div>
+		<div id="msg7"></div>
+		<div id="msg8"></div>
+
+
+
+		<script type="text/javascript">
+			var submitClick = function () {
+				document.getElementById('msg').innerHTML = "submit clicked";
+				var passVal = document.getElementById('password').value;
+				var repassVal = document.getElementById('repass').value;	
+				var country = document.getElementById('country').value;
+				var name = document.getElementsByClassName('name');
+				var phone = document.getElementById('phone').value; 
+				if (passVal.length < 6) {
+					document.getElementById('msg2').innerHTML = "password too short";
+					document.getElementById('msg2').style.backgroundColor = 'red';
+				}
+				else {
+					document.getElementById('msg2').innerHTML = "password is " + passVal; 	
+					document.getElementById('msg2').style.backgroundColor = 'green';
+				}
+				
+				if (passVal != repassVal) {
+					document.getElementById('msg3').innerHTML = "the passwords don't match";
+				}
+				else {
+					document.getElementById('msg3').innerHTML = "";	
+				}
+				
+				if ((country != "Israel") && (country != "USA")) {
+					document.getElementById('msg4').innerHTML = "this is not a valid country"; 
+				}
+				else {
+					document.getElementById('msg4').innerHTML = "";	
+				}
+				
+				for (var i=0; i<3; i++) {
+	 				if (name[i].value.indexOf(" ") !== -1) {
+						document.getElementById('msg' + (i+5)).innerHTML = "no spaces in your name please"; 
+					}	
+					else {
+						document.getElementById('msg'+(i+5)).innerHTML = "";		
+					}				
+				}
+				if (phone.length > 15 ) {
+					document.getElementById('msg8').innerHTML = "The phone number is invalid"; 
+				}
+				else {
+					document.getElementById('msg8').innerHTML = "";
+				}
+			}
+			document.getElementById('submit').onclick = submitClick;
+			
+		</script>
+
+
 	</body>
 </html>
